@@ -46,7 +46,6 @@ pub async fn find_handler(name: String, description: String, time: String, parse
         table.set_header(Row::from(vec![
             "Name",
             "Description",
-            "Is Dependency",
             "DateAdded",
             "Reason"
         ]));

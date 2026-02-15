@@ -1,0 +1,56 @@
+#!/bin/bash
+# /opt/PacWhy/scripts/pacman-wrapper.sh  (or wherever you symlink /usr/bin/pacman to)
+
+PACMAN=%PACMAN_PATH%
+
+# shellcheck disable=SC2093
+$PACMAN "$@"
+pacman_status=$?
+if [[ $pacman_status -ne 0 ]]; then
+    exit $pacman_status
+fi
+
+PACWHY_INSTALL="/opt/PacWhy/scripts/postInstall.sh"
+PACWHY_REMOVE="/opt/PacWhy/scripts/postRemoval.sh"
+
+packages=()
+skip_next=0
+action=""
+
+for arg in "$@"; do
+    if [[ $skip_next -eq 1 ]]; then
+        skip_next=0
+        continue
+    fi
+
+    case "$arg" in
+        -*S*)  action="install" ;;
+        -*R*)  action="remove"  ;;
+        --config|--root|--dbpath|--cachedir|--hookdir|--logfile|--arch)
+            skip_next=1
+            ;;
+    esac
+
+    if [[ "$arg" != -* ]]; then
+        if [[ -n "$action" ]]; then
+            packages+=("$arg")
+        fi
+    fi
+done
+
+if [[ ${#packages[@]} -eq 0 ]]; then
+    exit 0
+fi
+
+echo "##############"
+echo "# PacWhy 1.0 #"
+echo "##############"
+
+case "$action" in
+    install)
+        "$PACWHY_INSTALL" "${packages[@]}" || exit 1
+        ;;
+    remove)
+        "$PACWHY_REMOVE" "${packages[@]}" || exit 1
+        ;;
+esac

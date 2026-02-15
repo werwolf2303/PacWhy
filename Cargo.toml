@@ -1,0 +1,10 @@
+[package]
+name = "PacWhy"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+sea-orm = { version = "1.1.19", features = ["sqlx-sqlite", "runtime-tokio-rustls"] }
+tokio = { version = "1.49.0", features = ["full"] }
+comfy-table = "7.2.2"

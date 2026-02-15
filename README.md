@@ -43,6 +43,16 @@ PacWhy wraps the pacman binary to intercept installation commands and prompt for
 
 ---
 
+## AI Usage
+
+- AI was used to create and or revise the scripts
+
+- AI was used to revise the Readme
+
+**Rust code was not created or edited with AI**
+
+---
+
 ## Prerequisites
 
 * Arch Linux
@@ -118,5 +128,3 @@ Options:
   -h, --help     Print help
   -V, --version  Print version
 ```
-
----

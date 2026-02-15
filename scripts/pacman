@@ -1,5 +1,6 @@
 #!/bin/bash
-# /opt/PacWhy/scripts/pacman-wrapper.sh  (or wherever you symlink /usr/bin/pacman to)
+
+# Written by AI
 
 PACMAN=%PACMAN_PATH%
 

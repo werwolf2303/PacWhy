@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# pacwhy-reason-hook-test.sh
-# Simplified: only record explicitly installed packages, not dependencies
+
+# Written by AI
 
 set -euo pipefail
 
